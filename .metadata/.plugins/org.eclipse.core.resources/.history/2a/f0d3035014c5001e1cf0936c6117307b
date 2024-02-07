@@ -1,0 +1,68 @@
+package com.task.service.impl;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.task.model.ClassModel;
+import com.task.repo.ClassRepo;
+import com.task.service.IClassService;
+
+@Service
+public class ClassServiceImpl implements IClassService{
+
+	@Autowired
+	private ClassRepo classRepo;
+	
+	@Override
+	public ResponseEntity<?> addClass(ClassModel classModel) {
+		ClassModel classData = classRepo.findByClassName(classModel.getClassName());
+		if(Objects.isNull(classData)) {
+			ClassModel savedClass = classRepo.save(classModel);
+			return new ResponseEntity<>(savedClass,HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>(HttpStatus.FOUND);
+	}
+
+	@Override
+	public ResponseEntity<?> getClassById(Long id) {
+		Optional<ClassModel> classData = classRepo.findById(id);
+		if(classData.isPresent()) {
+			return new ResponseEntity<>(classData.get(),HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@Override
+	public ResponseEntity<?> getAllClasses() {
+		List<ClassModel> allClassData = classRepo.findAll();
+		return new ResponseEntity<>(allClassData,HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<?> updateClass(ClassModel classModel) {
+		Optional<ClassModel> classData = classRepo.findById(classModel.getClassId());
+		if(classData.isPresent()) {
+			ClassModel updatedClass = classRepo.save(classModel);
+			return new ResponseEntity<>(updatedClass,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@Override
+	public ResponseEntity<?> deleteClass(Long id) {
+		Optional<ClassModel> classData = classRepo.findById(id);
+		if(classData.isPresent()) {
+			classRepo.delete(classData.get());
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	
+}

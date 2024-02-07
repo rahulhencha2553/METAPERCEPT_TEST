@@ -1,0 +1,11 @@
+package com.task.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.task.service.IStudentService;
+
+
+@Service
+public class StudentServiceImpl implements IStudentService {
+
+}

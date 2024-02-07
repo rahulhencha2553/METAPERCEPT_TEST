@@ -1,0 +1,63 @@
+package com.task.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.task.model.ClassModel;
+import com.task.model.StudentModel;
+import com.task.repo.ClassRepo;
+import com.task.repo.StudentRepo;
+import com.task.service.IStudentService;
+
+
+@Service
+public class StudentServiceImpl implements IStudentService {
+	
+	@Autowired
+	private StudentRepo studentRepo;
+	
+	@Autowired
+	private ClassRepo classRepo;
+
+	@Override
+	public ResponseEntity<?> addStudent(Long classId, StudentModel studentModel) {
+		Optional<ClassModel> classOpt = classRepo.findById(classId);
+		if(classOpt.isPresent()) {
+			ClassModel classModel = classOpt.get();
+			classModel.setStudents(List.of(studentModel));
+			ClassModel savedClass = classRepo.save(classModel);
+			return new ResponseEntity<>(savedClass,HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+
+	@Override
+	public ResponseEntity<?> getStudentById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> getAllStudentByClassId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> updateStudent(StudentModel studentModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> deleteStudent(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

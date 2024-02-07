@@ -1,0 +1,52 @@
+package com.task.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.task.model.StudentModel;
+import com.task.repo.ClassRepo;
+import com.task.repo.StudentRepo;
+import com.task.service.IStudentService;
+
+
+@Service
+public class StudentServiceImpl implements IStudentService {
+	
+	@Autowired
+	private StudentRepo studentRepo;
+	
+	@Autowired
+	private ClassRepo classRepo;
+
+	@Override
+	public ResponseEntity<?> addStudent(Long classId, StudentModel studentModel) {
+		
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> getStudentById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> getAllStudentByClassId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> updateStudent(StudentModel studentModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> deleteStudent(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

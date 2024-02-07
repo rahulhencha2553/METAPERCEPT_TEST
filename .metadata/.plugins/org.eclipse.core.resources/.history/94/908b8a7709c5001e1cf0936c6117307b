@@ -1,0 +1,15 @@
+package com.task.service;
+
+import org.springframework.http.ResponseEntity;
+
+import com.task.model.ClassModel;
+
+public interface IClassService {
+
+	ResponseEntity<?> addClass(ClassModel classModel);
+
+	ResponseEntity<?> getClassById(Long id);
+
+	ResponseEntity<?> getAllClasses();
+
+}
